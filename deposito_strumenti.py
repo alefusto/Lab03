@@ -6,11 +6,21 @@ class DepositoStrumenti:
         """Inizializza gli attributi e le strutture dati"""
 
         self.nome = nome
-        self.responsabile = responsabile
+        self.__responsabile = responsabile
 
         self.lista_strumenti = [] # E' attributo del deposito, va definita qui, altrimenti si cancella ogni volta
         self.lista_prestiti = [] # Idem per questa
 
+    @property # Metodi per modificare il responsabile
+    def responsabile(self):
+        return self.__responsabile  # Qui per riferirsi all'attributo responsabile ci va il dunder
+
+    @responsabile.setter
+    def responsabile(self, nuovo_responsabile):
+        if nuovo_responsabile == self.__responsabile: # Aggiungo controllo sull'esistenza del responsabile
+            print("E' già responsabile")
+        else:
+            self.__responsabile = nuovo_responsabile
 
     def carica_file_strumenti(self, file_path):
         """Carica gli strumenti dal file"""
